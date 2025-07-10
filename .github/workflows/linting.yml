@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         go-version: [ stable, oldstable ]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [blacksmith-4vcpu-ubuntu-2404, macos-latest, windows-latest]
     env:
       GO_VERSION: stable
       GOLANGCI_LINT_VERSION: v1.59
@@ -29,11 +29,11 @@ jobs:
           git config --global core.eol lf
           git config --global core.autocrlf input
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: useblacksmith/setup-go@v6
         with:
           go-version: ${{ env.GO_VERSION }}
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: useblacksmith/golangci-lint-action@v6
         with:
           version: ${{ env.GOLANGCI_LINT_VERSION }}
